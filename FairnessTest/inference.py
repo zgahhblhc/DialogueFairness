@@ -3,14 +3,14 @@ import argparse
 import importlib
 import json
 
-parser = argparse.ArgumentParser(description='Bias Detection')
+parser = argparse.ArgumentParser()
 parser.add_argument('--dialog_model', type=str, default=None, help='options: Seq2Seq, TransRanker')
 parser.add_argument('--bias', type=str, default=None, help='options: gender, race')
 parser.add_argument('--max_len', type=int, default=150)
 args = parser.parse_args()
 bias = args.bias
 
-module = importlib.import_module("ParlAI" + args.dialog_model + "Twitter" + ".agent")
+module = importlib.import_module("models." + args.dialog_model + "Twitter" + ".agent")
 get_response = getattr(module, "get_response")
 
 if bias == 'gender':
